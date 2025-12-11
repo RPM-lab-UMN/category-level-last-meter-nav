@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Learning Category-level Last-meter Navigation from RGB Demonstrations of a Single-instance">
+  <meta name="keywords" content="Robotics, Navigation, Spot, Computer Vision, RGB-only">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Last-meter Nav: Last-meter Navigation</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://rpm-lab.github.io/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Learning Category-level Last-meter Navigation from RGB Demonstrations of a Single-instance</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="#">Tzu-Hsien Lee</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="#">Fidan Mahmudova</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="#">Karthik Desingh</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Minnesota,</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        Last-meter navigation enables robots to achieve <strong>manipulation-ready positioning</strong>, bridging the critical gap between global navigation and manipulation.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      
+      <div class="column">
+        <span class="icon is-large">
+            <i class="fas fa-route fa-3x"></i>
+        </span>
+        <h3 class="title is-4 mt-4">Last-Meter Navigation</h3>
+        <p>
+          Object-centric imitation learning framework that bridges global navigation and manipulation with centimeter-level accuracy.
+        </p>
+      </div>
+
+      <div class="column">
+        <span class="icon is-large">
+            <i class="fas fa-chair fa-3x"></i>
+        </span>
+        <h3 class="title is-4 mt-4">One-Instance Transfer</h3>
+        <p>
+          Demonstrates strong instance-to-category generalization, where a model trained on a single instance reliably transfers to unseen objects of the same category.
+        </p>
+      </div>
+
+      <div class="column">
+        <span class="icon is-large">
+            <i class="fas fa-eye fa-3x"></i>
+        </span>
+        <h3 class="title is-4 mt-4">RGB-Only Input</h3>
+        <p>
+          Real-world validation that precise last-meter navigation is achievable using only onboard RGB observations, without depth, LiDAR, or map priors. 
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Achieving precise positioning of the mobile manipulator's base is essential for successful manipulation actions that follow. Most of the RGB-based navigation systems only guarantee coarse, meter-level accuracy, making them less suitable for the precise positioning phase of mobile manipulation.
+          </p>
+          <p>
+            This gap prevents manipulation policies from operating within the distribution of their training demonstrations, resulting in frequent execution failures. We address this gap by introducing an object-centric imitation learning framework for <i>last-meter navigation</i>, enabling a quadruped mobile manipulator robot to achieve manipulation-ready positioning using only RGB observations from its onboard cameras.
+          </p>
+          <p>
+            Our method conditions the navigation policy on three inputs: goal images, multi-view RGB observations from the onboard cameras, and a text prompt specifying the target object. A language-driven segmentation module and a spatial score-matrix decoder then supply explicit object grounding and relative pose reasoning. Using real-world data from a single object instance within a category, the system generalizes to unseen object instances across diverse environments with challenging lighting and background conditions. To comprehensively evaluate this, we introduce two metrics: an edge-alignment metric, which uses ground truth orientation, and an object-alignment metric, which evaluates how well the robot visually faces the target. Under these metrics, our policy achieves <strong>73.47%</strong> success in edge-alignment and <strong>96.94%</strong> success in object-alignment when positioning relative to unseen target objects. These results show that precise last-meter navigation can be achieved at a category-level without depth, LiDAR, or map priors, enabling a scalable pathway toward unified mobile manipulation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Sequential Navigation</h2>
+        <div class="content has-text-justified">
+          <p>
+            Last-meter Nav enables the robot to navigate effectively between different objects, facilitating sequential multi-stage mobile manipulation tasks. By chaining last-meter navigation policies, the robot can transition from one workspace to another with high precision.
+          </p>
+        </div>
+        <div class="publication-video">
+          <video id="sequential-nav" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/Moving_Between_Objects.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Dynamic Target Tracking</h2>
+        <div class="content has-text-justified">
+          <p>
+             Our method demonstrates robustness to dynamic environments, successfully adjusting to target objects that are constantly moving during operation. The system continuously re-evaluates the target's pose relative to the robot, adjusting the approach path in real-time.
+          </p>
+        </div>
+        <div class="publication-video">
+          <video id="moving-target" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/Moving_target_object.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Last-meter Navigation</h2>
+    <div class="columns is-centered is-vcentered">
+      
+      <div class="column is-6">
+        <figure class="image">
+          <img src="./static/images/teaser_figure.png" alt="Last-meter Navigation Concept Overview" style="max-width: 100%;">
+          <figcaption class="has-text-centered mt-2" style="font-size: 0.8em;">
+            In this example, the target is the orange chair, and the desired final pose is defined by the goal image, which shows the front view of the chair. After global navigation brings the robot to the vicinity of the target, the robot detects the chair and invokes <strong>Last-meter Nav</strong> to refine its position and orientation, achieving a precise manipulation-ready pose, even in the presence of other chairs in the environment.
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="column is-6">
+        <div class="content has-text-justified">
+          <p>
+            Effective mobile manipulation requires robots to seamlessly transition from moving through a space to interacting with objects. However, a critical gap exists in this process: standard global navigation systems typically stop within a coarse 1-meter radius of the target. This margin of error is insufficient for manipulation policies, which require centimeter-level precision to function within their training distributions. While some approaches rely on expensive sensors like LiDAR or pre-built maps (NeRFs) to bridge this gap, these requirements limit scalability. We address this by defining the <strong>“last-meter navigation”</strong> problem—a focused stage using only onboard RGB cameras to achieve precise, manipulation-ready alignment, assuming the target is visible and the path is clear.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Robustness & Generalization</h2>
+    <div class="content has-text-justified">
+      <p>
+        Our method shows strong instance-to-category generalization, operating successfully with unseen objects and in novel indoor/outdoor environments.
+      </p>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-one-third">
+        <h5 class="title is-6 has-text-centered">Indoor Env 1</h5>
+        <video autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/indoor1.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="column is-one-third">
+        <h5 class="title is-6 has-text-centered">Indoor Env 2</h5>
+        <video autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/indoor2.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="column is-one-third">
+        <h5 class="title is-6 has-text-centered">Outdoor Env</h5>
+        <video autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/outdoor.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Methodology</h2>
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <figure class="image">
+            <img src="./static/images/methodology.png" alt="System Architecture">
+        </figure>
+        <div class="content has-text-justified mt-4">
+          <p>
+            <strong>Architecture Overview.</strong> At each timestep, the model receives current and goal observations. A segmentation module (driven by a language prompt) generates object masks. The action decoder uses a spatial score-matrix to predict discrete actions (Forward, Lateral, Rotate).
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Qualitative Results</h2>
+    <div class="content has-text-justified">
+      <p>
+         Qualitative examples of Last-meter Nav performing object alignment and edge alignment across various unseen chair instances.
+      </p>
+    </div>
+    
+    <div class="columns is-centered">
+      <div class="column is-one-fifth">
+        <video autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/chair1.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="column is-one-fifth">
+        <video autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/chair2.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="column is-one-fifth">
+        <video autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/chair3.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="column is-one-fifth">
+        <video autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/chair4.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="column is-one-fifth">
+        <video autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/chair5.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-one-fifth">
+        <video autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/chair6.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="column is-one-fifth">
+        <video autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/chair7.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="column is-one-fifth">
+        <video autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/chair8.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="column is-one-fifth">
+        <video autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/chair9.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="column is-one-fifth">
+        <video autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/chair10.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Quantitative Results</h2>
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        
+        <figure class="image mb-5">
+            <img src="./static/images/part1.png" alt="Part 1 Results">
+        </figure>
+        
+        <figure class="image">
+            <img src="./static/images/part2.png" alt="Part 2 Results">
+        </figure>
+
+        <div class="content has-text-justified mt-4">
+          <p>
+             Our system (DinoScoreAux) achieves the highest success rate among baselines, demonstrating the importance of the spatial score-matrix decoder and auxiliary stopping mechanism.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- <section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{lastmeternav2025,
+  author    = {Lee, Tzu-Hsien and Mahmudova, Fidan and Desingh, Karthik},
+  title     = {Learning Category-level Last-meter Navigation from RGB Demonstrations of a Single-instance},
+  journal   = {IEEE Robotics and Automation Letters (RA-L)},
+  year      = {2025},
+}</code></pre>
+  </div>
+</section> -->
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            Template borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
