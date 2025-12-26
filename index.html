@@ -57,8 +57,7 @@
           <h1 class="title is-1 publication-title">Learning Category-level Last-meter Navigation from RGB Demonstrations of a Single-instance</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <!-- <a href="https://bentzuhsien.github.io/">Tzu-Hsien Lee</a>,</span> -->
-              <a href="https://www.linkedin.com/in/bentzuhsien">Tzu-Hsien Lee</a>,</span>
+              <a href="https://bentzuhsien.github.io/">Tzu-Hsien Lee</a>,</span>
             <span class="author-block">
               <a href="https://www.linkedin.com/in/fidan-mahmudova/">Fidan Mahmudova</a>,</span>
             <span class="author-block">
@@ -72,15 +71,15 @@
 
           <div class="column has-text-centered">
             <div class="publication-links">
-              <!-- <span class="link-block">
-                <a href="#"
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2512.11173"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                   </span>
                   <span>Paper</span>
                 </a>
-              </span> -->
+              </span>
               <span class="link-block">
                 <a href="https://arxiv.org/abs/2512.11173"
                    class="external-link button is-normal is-rounded is-dark">
@@ -305,73 +304,55 @@
   </div>
 </section>
 
-<!-- <section class="section">
+<section class="section" id="qualitative-results">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Qualitative Results</h2>
-    <div class="content has-text-justified">
+
+    <div class="content has-text-justified mb-4">
       <p>
-         Qualitative examples of Last-meter Nav performing object alignment and edge alignment across various unseen chair instances.
+        We present qualitative results of category-level last-meter navigation across a diverse set of target objects and environments.
+        Each scenario corresponds to a distinct object instance and scene configuration.
+        Multiple trials are shown for each scenario to highlight consistency, robustness, and failure modes under varying initial conditions.
+      </p>
+      <p>
+        Use the menu below to select a Scenario and a corresponding Trial:
       </p>
     </div>
-    
-    <div class="columns is-centered">
-      <div class="column is-one-fifth">
-        <video autoplay controls muted loop playsinline width="100%">
-          <source src="./static/videos/chair1.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="column is-one-fifth">
-        <video autoplay controls muted loop playsinline width="100%">
-          <source src="./static/videos/chair2.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="column is-one-fifth">
-        <video autoplay controls muted loop playsinline width="100%">
-          <source src="./static/videos/chair3.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="column is-one-fifth">
-        <video autoplay controls muted loop playsinline width="100%">
-          <source src="./static/videos/chair4.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="column is-one-fifth">
-        <video autoplay controls muted loop playsinline width="100%">
-          <source src="./static/videos/chair5.mp4" type="video/mp4">
-        </video>
-      </div>
-    </div>
 
     <div class="columns is-centered">
-      <div class="column is-one-fifth">
-        <video autoplay controls muted loop playsinline width="100%">
-          <source src="./static/videos/chair6.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="column is-one-fifth">
-        <video autoplay controls muted loop playsinline width="100%">
-          <source src="./static/videos/chair7.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="column is-one-fifth">
-        <video autoplay controls muted loop playsinline width="100%">
-          <source src="./static/videos/chair8.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="column is-one-fifth">
-        <video autoplay controls muted loop playsinline width="100%">
-          <source src="./static/videos/chair9.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="column is-one-fifth">
-        <video autoplay controls muted loop playsinline width="100%">
-          <source src="./static/videos/chair10.mp4" type="video/mp4">
-        </video>
+      <div class="column is-full-width">
+        <div class="content has-text-centered">
+          <div class="select is-medium mr-2">
+            <select id="scenario-menu" onchange="updateTrialOptions(); updateQualVideo();">
+              <option value="Scenario1" selected>Scenario1</option>
+              <option value="Scenario2">Scenario2</option>
+              <option value="Scenario3">Scenario3</option>
+              <option value="Scenario4">Scenario4</option>
+              <option value="Scenario5">Scenario5</option>
+              <option value="Scenario6">Scenario6</option>
+              <option value="Scenario7">Scenario7</option>
+              <option value="Scenario8">Scenario8</option>
+              <option value="Scenario9">Scenario9</option>
+              <option value="Scenario10">Scenario10</option>
+            </select>
+          </div>
+
+          <div class="select is-medium">
+            <select id="trial-menu" onchange="updateQualVideo();">
+              <!-- options will be filled by JS -->
+            </select>
+          </div>
+        </div>
+
+        <div class="publication-video mt-4">
+          <video id="qual-video" controls autoplay loop muted playsinline width="100%">
+            <source id="qual-video-src" src="" type="video/mp4">
+          </video>
+        </div>
       </div>
     </div>
-
   </div>
-</section> -->
+</section>
 
 <section class="section">
   <div class="container is-max-desktop">
@@ -431,6 +412,59 @@
     </div>
   </div>
 </footer>
+
+<script>
+  // Map: scenario -> array of available trials
+  const SCENARIO_TO_TRIALS = {
+    "Scenario1": ["trial1", "trial2", "trial3", "trial4", "trial5", "trial6", "trial7", "trial8", "trial9", "trial10"],
+    "Scenario2": ["trial1", "trial2", "trial3", "trial4", "trial5", "trial6", "trial7", "trial8", "trial9", "trial10"],
+    "Scenario3": ["trial1", "trial2", "trial3", "trial4", "trial5", "trial6", "trial7", "trial8", "trial9", "trial10"],
+    "Scenario4": ["trial1", "trial2", "trial3", "trial4", "trial5", "trial6", "trial7", "trial8", "trial9", "trial10"],
+    "Scenario5": ["trial1", "trial2", "trial3", "trial4", "trial5", "trial6", "trial7", "trial8", "trial9", "trial10"],
+    "Scenario6": ["trial1", "trial2", "trial3", "trial4", "trial5", "trial6", "trial7", "trial8", "trial9", "trial10"],
+    "Scenario7": ["trial1", "trial2", "trial3", "trial4", "trial5", "trial6", "trial7", "trial8", "trial9", "trial10"],
+    "Scenario8": ["trial1", "trial2", "trial3", "trial4", "trial5", "trial6", "trial7", "trial8", "trial9", "trial10"],
+    "Scenario9": ["trial1", "trial2", "trial3", "trial4", "trial5", "trial6", "trial7", "trial8", "trial9", "trial10"],
+    "Scenario10": ["trial1", "trial2", "trial3", "trial4", "trial5", "trial6", "trial7", "trial8", "trial9", "trial10"],
+  };
+
+  const VIDEO_BASE = "./static/videos/qualitative";
+
+  function buildVideoPath(scenario, trial) {
+    return `${VIDEO_BASE}/${scenario}/${trial}.mp4`;
+  }
+
+  function updateTrialOptions() {
+    const scenario = document.getElementById("scenario-menu").value;
+    const trialMenu = document.getElementById("trial-menu");
+
+    const trials = SCENARIO_TO_TRIALS[scenario] || ["trial1"];
+    trialMenu.innerHTML = "";
+
+    for (const t of trials) {
+      const opt = document.createElement("option");
+      opt.value = t;
+      opt.textContent = t;
+      trialMenu.appendChild(opt);
+    }
+  }
+
+  function updateQualVideo() {
+    const scenario = document.getElementById("scenario-menu").value;
+    const trial = document.getElementById("trial-menu").value;
+
+    const video = document.getElementById("qual-video");
+    const source = document.getElementById("qual-video-src");
+
+    source.src = buildVideoPath(scenario, trial);
+    video.load();
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    updateTrialOptions();
+    updateQualVideo();
+  });
+</script>
 
 </body>
 </html>
