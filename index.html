@@ -181,28 +181,12 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered">Sequential Last-meter Navigation for Mobile Manipulation</h2>
-        <div class="content has-text-justified">
-          <p>
-            Last-meter navigation enables the robot to navigate effectively between different objects, facilitating sequential multi-stage mobile manipulation tasks. By chaining last-meter navigation policies, the robot can transition from one workspace to another with high precision.
-          </p>
-        </div>
-        <div class="publication-video">
-          <video id="sequential-nav" autoplay controls loop playsinline height="100%">
-            <source src="./static/videos/Moving_Between_Objects.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Last-meter Navigation</h2>
+      <div class="content has-text-justified">
+        <p>
+          Last-meter navigation is the stage between global path planning and manipulation in which the robot must achieve centimeter-level positional and degree-level orientation accuracy relative to a target. Whereas global navigation often deems success as stopping within about one meter, manipulation policies operate reliably only under much tighter alignment, and this mismatch causes many mobile manipulation failures. Last-meter navigation addresses this gap by explicitly focusing on the final meter of motion so that the robot arrives in a manipulation-ready pose.
+        </p>
+      </div>
     <div class="columns is-centered is-vcentered">
       
       <div class="column is-6">
@@ -221,13 +205,31 @@
       <div class="column is-6">
         <div class="content has-text-justified">
           <p>
-            Last-meter navigation is the stage between global path planning and manipulation in which the robot must achieve centimeter-level positional and degree-level orientation accuracy relative to a target. Whereas global navigation often deems success as stopping within about one meter, manipulation policies operate reliably only under much tighter alignment, and this mismatch causes many mobile manipulation failures. Last-meter navigation addresses this gap by explicitly focusing on the final meter of motion so that the robot arrives in a manipulation-ready pose.
-          </p>
-          <p>
             In the example on the left: (1) global navigation first drives the robot near the target; (2) once the target object (e.g., the orange chair) is detected, our policy is invoked; and (3) last-meter navigation adjusts the robot’s base to a precise manipulation-ready pose defined by a goal observation.
           </p>
         </div>
 
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Sequential Last-meter Navigation for Mobile Manipulation</h2>
+        <div class="content has-text-justified">
+          <p>
+            Last-meter navigation enables the robot to navigate effectively between different objects, facilitating sequential multi-stage mobile manipulation tasks. By chaining last-meter navigation policies, the robot can transition from one workspace to another with high precision.
+          </p>
+        </div>
+        <div class="publication-video">
+          <video id="sequential-nav" autoplay controls loop playsinline height="100%">
+            <source src="./static/videos/Moving_Between_Objects.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
     </div>
   </div>
 </section>
