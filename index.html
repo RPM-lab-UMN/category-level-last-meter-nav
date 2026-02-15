@@ -6,7 +6,7 @@
         content="Learning Category-level Last-meter Navigation from RGB Demonstrations of a Single-instance">
   <meta name="keywords" content="Robotics, Navigation, Spot, Computer Vision, RGB-only">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Last-meter Nav: Last-meter Navigation</title>
+  <title>Category-level Last-meter Navigation</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -154,6 +154,19 @@
         </p>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Video Presentation</h2>
+    <div class="publication-video" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; width: 100%;">
+      <iframe 
+        src="https://drive.google.com/file/d/1y0wfaXJF0Luttk5PnHK2X9DwcfAF3dLZ/preview" 
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" 
+        allow="autoplay">
+      </iframe>
     </div>
   </div>
 </section>
@@ -337,7 +350,17 @@
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Quantitative Results</h2>
     <div class="columns is-centered">
+
       <div class="column is-full-width">
+
+        <div class="content has-text-justified mt-4">
+          <p>
+            We evaluate several policies to understand what enables reliable category-level last-meter navigation.
+            Our full system, <strong>DinoScoreAux</strong>, achieves the highest success rates across both seen and unseen objects,
+            highlighting the importance of explicit object grounding, the spatial score-matrix representation, and an auxiliary stopping mechanism.
+            We further demonstrate strong generalization in three unseen indoor and outdoor environments.
+          </p>
+        </div>
         
         <figure class="image mb-5">
             <img src="./static/images/part1.png" alt="Part 1 Results">
@@ -347,11 +370,6 @@
             <img src="./static/images/part2.png" alt="Part 2 Results">
         </figure>
 
-        <div class="content has-text-justified mt-4">
-          <p>
-             Our system (DinoScoreAux) achieves the highest success rate among baselines, demonstrating the importance of the spatial score-matrix decoder and auxiliary stopping mechanism.
-          </p>
-        </div>
       </div>
     </div>
   </div>
