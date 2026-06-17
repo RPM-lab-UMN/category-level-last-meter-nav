@@ -69,6 +69,12 @@
             <span class="author-block">University of Minnesota,</span>
           </div>
 
+          <div class="is-size-5 publication-authors" style="margin-top: 0.75rem;">
+            <span class="author-block has-text-weight-bold">
+              Accepted to IEEE Robotics and Automation Letters (RA-L), 2026
+            </span>
+          </div>
+
           <div class="column has-text-centered">
             <div class="publication-links">
               <span class="link-block">
@@ -184,7 +190,7 @@
             This gap prevents manipulation policies from operating within the distribution of their training demonstrations, resulting in frequent execution failures. We address this gap by introducing an object-centric imitation learning framework for <i>last-meter navigation</i>, enabling a quadruped mobile manipulator robot to achieve manipulation-ready positioning using only RGB observations from its onboard cameras.
           </p>
           <p>
-            Our method conditions the navigation policy on three inputs: goal images, multi-view RGB observations from the onboard cameras, and a text prompt specifying the target object. A language-driven segmentation module and a spatial score-matrix decoder then supply explicit object grounding and relative pose reasoning. Using real-world data from a single object instance within a category, the system generalizes to unseen object instances across diverse environments with challenging lighting and background conditions. To comprehensively evaluate this, we introduce two metrics: an edge-alignment metric, which uses ground truth orientation, and an object-alignment metric, which evaluates how well the robot visually faces the target. Under these metrics, our policy achieves <strong>73.47%</strong> success in edge-alignment and <strong>96.94%</strong> success in object-alignment when positioning relative to unseen target objects. These results show that precise last-meter navigation can be achieved at a category-level without depth, LiDAR, or map priors, enabling a scalable pathway toward unified mobile manipulation.
+            Our method conditions the navigation policy on three inputs: goal images, multi-view RGB observations from the onboard cameras, and a text prompt specifying the target object. A language-driven segmentation module and a spatial score-matrix decoder then supply explicit object grounding and relative pose reasoning. Using real-world data from a single object instance within a category, the system generalizes to unseen object instances across diverse environments with challenging lighting and background conditions. To comprehensively evaluate this, we introduce two metrics: an edge-alignment metric, which uses ground truth orientation, and an object-alignment metric, which evaluates how well the robot visually faces the target. Under these metrics, our policy achieves <strong>74.58%</strong> success in edge-alignment and <strong>89.42%</strong> success in object-alignment when positioning relative to unseen target objects. These results show that precise last-meter navigation can be achieved at a category-level without depth, LiDAR, or map priors, enabling a scalable pathway toward unified mobile manipulation.
           </p>
         </div>
       </div>
@@ -375,7 +381,189 @@
   </div>
 </section>
 
+<!-- ============================================================
+     Cross-Category Generalization (drawer organizer, suitcase)
+     ============================================================ -->
+<section class="section" id="cross-category">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Results on more categories</h2>
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content has-text-justified">
+          <p>
+            Beyond the chair experiments reported in the paper, we extended our category-level generalization study to two additional object categories with distinct visual and geometric properties: <strong>drawer organizers</strong> and <strong>suitcases</strong>. For each category, a separate <strong>DinoScoreAux</strong> policy was trained on a single instance using the same automated demonstration pipeline, and evaluated on two unseen instances of the same category without any re-tuning. The auxiliary stopping mechanism used identical threshold values across all categories.
+          </p>
+        </div>
+ 
+        <figure class="image mb-5">
+  		<img src="./static/images/Extra Category objects.png" alt="All tested instances across categories">
+          <figcaption class="has-text-centered mt-2">
+            <em>All tested instances across suitcase and drawer organizer categories.</em>
+          </figcaption>
+        </figure>
+ 
+        <h3 class="title is-5 has-text-centered mt-5">Success Rates on Additional Categories</h3>
+        <div class="table-container">
+          <table class="table is-bordered is-striped is-fullwidth">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Instance</th>
+                <th class="has-text-centered">Edge Alignment</th>
+                <th class="has-text-centered">Object Alignment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="3"><strong>Suitcase</strong></td>
+                <td>Red (Trained)</td>
+                <td class="has-text-centered">0.96</td>
+                <td class="has-text-centered">1.00</td>
+              </tr>
+              <tr>
+                <td>Yellow (Unseen)</td>
+                <td class="has-text-centered">0.96</td>
+                <td class="has-text-centered">0.98</td>
+              </tr>
+              <tr>
+                <td>Black (Unseen)</td>
+                <td class="has-text-centered">0.86</td>
+                <td class="has-text-centered">0.94</td>
+              </tr>
+              <tr>
+                <td rowspan="3"><strong>Drawer Organizer</strong></td>
+                <td>Gray (Trained)</td>
+                <td class="has-text-centered">0.88</td>
+                <td class="has-text-centered">0.90</td>
+              </tr>
+              <tr>
+                <td>Yellow (Unseen)</td>
+                <td class="has-text-centered">0.82</td>
+                <td class="has-text-centered">0.88</td>
+              </tr>
+              <tr>
+                <td>Green (Unseen)</td>
+                <td class="has-text-centered">0.37</td>
+                <td class="has-text-centered">0.57</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+ 
+        <div class="content has-text-justified mt-4">
+          <p>
+            Suitcases generalize strongly to unseen instances. Drawer organizers generalize well to one unseen instance (Yellow) and degrade on the translucent green instance, where the body's translucent panels corrupt DINOv2 features and prevent fine-grained alignment. Across all categories, perception robustness, rather than the policy itself, is the dominant factor governing category-level transfer.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ============================================================
+     Threshold Sensitivity Analysis
+     ============================================================ -->
+<section class="section" id="threshold-sensitivity">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Threshold Sensitivity Analysis</h2>
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content has-text-justified">
+          <p>
+            To analyze how success rates vary with the chosen evaluation thresholds, we recompute edge alignment success at four threshold settings, across the chair, drawer organizer, and suitcase categories. Three patterns emerge: success increases monotonically across all nine instances with no cliff edges or inversions; the curve plateaus at or above the default threshold for most instances, indicating that the default sits at a stable region of the threshold-to-success curve; and the steepest drops occur when tightening below default, where the threshold approaches the Spot platform's actuation floor. Instances that degrade most under tightening (Gray Chair and Green Drawer Organizer) are those already identified as perceptually challenging.
+          </p>
+        </div>
+ 
+        <div class="table-container">
+          <table class="table is-bordered is-striped is-fullwidth">
+            <thead>
+              <tr>
+                <th rowspan="2" class="is-vcentered">Category</th>
+                <th rowspan="2" class="is-vcentered">Instance</th>
+                <th class="has-text-centered">Strict</th>
+                <th class="has-text-centered">Default</th>
+                <th class="has-text-centered">Relaxed</th>
+                <th class="has-text-centered">Permissive</th>
+              </tr>
+              <tr>
+                <th class="has-text-centered"><small>(0.2&thinsp;m, &plusmn;6&deg;)</small></th>
+                <th class="has-text-centered"><small>(0.3&thinsp;m, &plusmn;8&deg;)</small></th>
+                <th class="has-text-centered"><small>(0.4&thinsp;m, &plusmn;11&deg;)</small></th>
+                <th class="has-text-centered"><small>(0.5&thinsp;m, &plusmn;15&deg;)</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="3"><strong>Chair</strong></td>
+                <td>Green (Trained)</td>
+                <td class="has-text-centered">0.84</td>
+                <td class="has-text-centered">0.98</td>
+                <td class="has-text-centered">1.00</td>
+                <td class="has-text-centered">1.00</td>
+              </tr>
+              <tr>
+                <td>Blue (Unseen)</td>
+                <td class="has-text-centered">0.76</td>
+                <td class="has-text-centered">0.86</td>
+                <td class="has-text-centered">0.94</td>
+                <td class="has-text-centered">0.98</td>
+              </tr>
+              <tr>
+                <td>Gray (Unseen)</td>
+                <td class="has-text-centered">0.41</td>
+                <td class="has-text-centered">0.61</td>
+                <td class="has-text-centered">0.82</td>
+                <td class="has-text-centered">0.92</td>
+              </tr>
+              <tr>
+                <td rowspan="3"><strong>Drawer Organizer</strong></td>
+                <td>Gray (Trained)</td>
+                <td class="has-text-centered">0.82</td>
+                <td class="has-text-centered">0.88</td>
+                <td class="has-text-centered">0.90</td>
+                <td class="has-text-centered">0.92</td>
+              </tr>
+              <tr>
+                <td>Yellow (Unseen)</td>
+                <td class="has-text-centered">0.63</td>
+                <td class="has-text-centered">0.82</td>
+                <td class="has-text-centered">0.92</td>
+                <td class="has-text-centered">0.94</td>
+              </tr>
+              <tr>
+                <td>Green (Unseen)</td>
+                <td class="has-text-centered">0.20</td>
+                <td class="has-text-centered">0.37</td>
+                <td class="has-text-centered">0.67</td>
+                <td class="has-text-centered">0.84</td>
+              </tr>
+              <tr>
+                <td rowspan="3"><strong>Suitcase</strong></td>
+                <td>Red (Trained)</td>
+                <td class="has-text-centered">0.90</td>
+                <td class="has-text-centered">0.96</td>
+                <td class="has-text-centered">1.00</td>
+                <td class="has-text-centered">1.00</td>
+              </tr>
+              <tr>
+                <td>Yellow (Unseen)</td>
+                <td class="has-text-centered">0.67</td>
+                <td class="has-text-centered">0.96</td>
+                <td class="has-text-centered">1.00</td>
+                <td class="has-text-centered">1.00</td>
+              </tr>
+              <tr>
+                <td>Black (Unseen)</td>
+                <td class="has-text-centered">0.76</td>
+                <td class="has-text-centered">0.86</td>
+                <td class="has-text-centered">0.92</td>
+                <td class="has-text-centered">0.94</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
